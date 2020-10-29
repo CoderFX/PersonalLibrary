@@ -26,13 +26,19 @@ public class Author implements Serializable {
     @JsonIgnore
     @ManyToMany
     @JoinTable(
-            name="WrittenBy",
+            name="writtenBy",
             joinColumns = @JoinColumn(name="author_id", referencedColumnName = "author_id"),
             inverseJoinColumns = @JoinColumn(name="book_id", referencedColumnName = "book_id")
     )
     private List<Book> books = new ArrayList<Book>();
 
     public Author() {}
+
+    public Author(String firstName, String lastName) {
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public Integer getAuthorId() {
         return author_id;
