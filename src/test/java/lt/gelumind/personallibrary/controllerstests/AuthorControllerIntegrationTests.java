@@ -29,7 +29,7 @@ public class AuthorControllerIntegrationTests {
     public void testAllAuthors() {
         assertTrue(
                 this.restTemplate
-                .getForObject("http://localhost:" + port + "/authors", Authors.class)
+                .getForObject("http://localhost:" + port + "/api/authors", Authors.class)
                 .getAuthorList().size() == 3);
     }
 
@@ -37,7 +37,7 @@ public class AuthorControllerIntegrationTests {
     public void testAddAuthor() {
         Author author = new Author("Patrick", "Rothfuss");
         ResponseEntity<String> responseEntity = this.restTemplate
-                .postForEntity("http://localhost:" + port + "/authors", author, String.class);
+                .postForEntity("http://localhost:" + port + "/api/authors", author, String.class);
         assertEquals(201, responseEntity.getStatusCodeValue());
     }
 

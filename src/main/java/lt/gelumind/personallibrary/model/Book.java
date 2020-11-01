@@ -11,7 +11,7 @@ public class Book implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
     private Integer book_id;
 
@@ -31,6 +31,12 @@ public class Book implements Serializable {
     }
 
     public Book(String title, int year, Author author) {
+        super();
+        this.title = title;
+        this.year = year;
+    }
+
+    public Book(String title, int year) {
         super();
         this.title = title;
         this.year = year;
