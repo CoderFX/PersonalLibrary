@@ -8,7 +8,7 @@ INSERT INTO AUTHORS (author_id, first_name, last_name) VALUES
 (2, 'Deja', 'Vu'),
 (3, 'Caption', 'America');
 
-INSERT INTO WRITTEN_BY (author_id, book_id) VALUES
+INSERT INTO BOOK_AUTHORS (author_id, book_id) VALUES
 (1, 1),
 (2, 2),
 (3, 3);

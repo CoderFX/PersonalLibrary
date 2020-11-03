@@ -24,7 +24,11 @@ public class AuthorControllerIntegrationTests {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    // Create sql schema and insert data
     @Sql({"classpath:schema.sql", "classpath:data.sql"})
+
+
+
     @Test
     public void testAllAuthors() {
         assertTrue(

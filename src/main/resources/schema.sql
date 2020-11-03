@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS authors CASCADE;
 DROP TABLE IF EXISTS books CASCADE;
-DROP TABLE IF EXISTS written_by CASCADE;
+DROP TABLE IF EXISTS book_authors CASCADE;
 
 CREATE TABLE authors
 (
@@ -20,18 +20,18 @@ CREATE TABLE books
 
 );
 
-CREATE TABLE written_by
+CREATE TABLE book_authors
 (
 author_id integer not null,
         book_id integer not null
 );
 
-alter table written_by
+alter table book_authors
        add constraint FKaplrj3g6pw72p4kceta338okj
        foreign key (book_id)
        references books;
 
-alter table written_by
+alter table book_authors
        add constraint FK6b48wl2lxbg2dynww4yefcb4b
        foreign key (author_id)
        references authors;

@@ -15,18 +15,18 @@ public class Author implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "author_id")
-    private Integer author_id;
+    private Long id;
 
-    @Column(name = "firstName")
+    @Column(name = "firstName", nullable = false)
     private String firstName;
 
-    @Column(name = "lastName")
+    @Column(name = "lastName", nullable = false)
     private String lastName;
 
     @JsonIgnore
     @ManyToMany
     @JoinTable(
-            name="writtenBy",
+            name="book_authors",
             joinColumns = @JoinColumn(name="author_id", referencedColumnName = "author_id"),
             inverseJoinColumns = @JoinColumn(name="book_id", referencedColumnName = "book_id")
     )
@@ -40,12 +40,12 @@ public class Author implements Serializable {
         this.lastName = lastName;
     }
 
-    public Integer getAuthorId() {
-        return author_id;
+    public Long getAuthorId() {
+        return id;
     }
 
-    public void setAuthorId(Integer author_id) {
-        this.author_id = author_id;
+    public void setAuthorId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -74,6 +74,6 @@ public class Author implements Serializable {
 
     @Override
     public String toString() {
-        return "Author [author_id=" + author_id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+        return "Author [author_id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
     }
 }

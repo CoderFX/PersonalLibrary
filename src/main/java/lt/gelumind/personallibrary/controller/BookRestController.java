@@ -1,46 +1,75 @@
 package lt.gelumind.personallibrary.controller;
 
+import lombok.RequiredArgsConstructor;
 import lt.gelumind.personallibrary.dao.BookRepository;
 import lt.gelumind.personallibrary.model.Book;
-import lt.gelumind.personallibrary.model.Books;
+import lt.gelumind.personallibrary.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 public class BookRestController extends ApiRestController {
     @Autowired
     private BookRepository bookRepository;
 
-    @GetMapping(path="/books", produces = "application/json")
-    public Books getBooks() {
-        Books response = new Books();
-        ArrayList<Book> list = new ArrayList<>();
-        bookRepository.findAll().forEach(e -> list.add(e));
-        response.setBookList(list);
-        return response;
+    @Autowired
+    BookService bookService;
+
+    // Get all books
+    @GetMapping(value = "/books", produces = "application/json")
+    public List<Book> getAll() {
+        return bookService.getAllBooks();
     }
 
-    @PostMapping(path= "/books", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> addBook(@RequestBody Book book) {
-
-        // add resource
-        book = bookRepository.save(book);
-
-        // Create resource location
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(book.getBookId())
-                .toUri();
-
-        // Send location in response
-        return ResponseEntity.created(location).build();
+    // Get book by ID
+    @GetMapping(value = "/book?{id}", produces = "application/json")
+    public @ResponseBody
+    Optional<Book> getBookById(@PathVariable Long id) {
+        return bookService.getById(id);
     }
+
+    // Get book by title
+    @GetMapping(value = "/book/title?{title}", produces = "application/json")
+    public List<Book> getBookByTitle(@PathVariable String title) {
+        return bookService.getByTitle(title.replace('+', ' '));
+    }
+
+    // Add book
+    @PostMapping(value = "/book", consumes = "application/json", produces = "application/json")
+    public HttpStatus addBook(@RequestBody Book book) {
+        return bookService.addBook(book) ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST;
+    }
+
+    // Update book
+    @PutMapping(value = "/book", consumes = "application/json", produces = "application/json")
+    public HttpStatus updateBook(@RequestBody Book book) {
+        return bookService.updateBook(book) ? HttpStatus.ACCEPTED : HttpStatus.BAD_REQUEST;
+    }
+
+    // Delete book
+    @DeleteMapping(value = "/book?{id}", consumes = "application/json", produces = "application/json")
+    public HttpStatus deleteBook(@PathVariable Long id) {
+        bookService.deleteBook(id);
+        return HttpStatus.NO_CONTENT;
+    }
+
+    // Add author to book
+    @PutMapping(value = "/book/{bookId}/author/{authorId}", produces = "application/json")
+    public HttpStatus addAuthor(@PathVariable Long bookId, @PathVariable Long authorId) {
+        return bookService.addAuthor(bookId, authorId) ? HttpStatus.ACCEPTED : HttpStatus.BAD_REQUEST;
+    }
+
+//    @GetMapping(path="/books", produces = "application/json")
+//    public Books getBooks() {
+//        Books response = new Books();
+//        ArrayList<Book> list = new ArrayList<>();
+//        bookRepository.findAll().forEach(e -> list.add(e));
+//        response.setBookList(list);
+//        return response;
+//    }
 }
