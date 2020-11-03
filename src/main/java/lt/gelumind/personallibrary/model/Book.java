@@ -13,18 +13,15 @@ public class Book implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
-    private Integer book_id;
+    private Long id;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "year")
+    @Column(name = "year", nullable = false)
     private int year;
 
-    @Column(name = "author_id")
-    private Integer author_id;
-
-    @ManyToMany(mappedBy = "books", cascade = { CascadeType.ALL})
+    @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Author> authors = new ArrayList<Author>();
 
     public Book() {
@@ -42,12 +39,12 @@ public class Book implements Serializable {
         this.year = year;
     }
 
-    public Integer getBookId() {
-        return book_id;
+    public Long getBookId() {
+        return id;
     }
 
-    public void setBookId(Integer book_id) {
-        this.book_id = book_id;
+    public void setBookId(Long id) {
+        this.id = id;
     }
 
     public String getBookTitle() {
