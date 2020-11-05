@@ -1,13 +1,17 @@
 package lt.gelumind.personallibrary.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jdk.nashorn.internal.objects.annotations.Constructor;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Component
 @Table(name = "authors")
 public class Author implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -18,9 +22,11 @@ public class Author implements Serializable {
     private Long id;
 
     @Column(name = "firstName", nullable = false)
+    @NotEmpty
     private String firstName;
 
     @Column(name = "lastName", nullable = false)
+    @NotEmpty
     private String lastName;
 
     @JsonIgnore
@@ -34,17 +40,23 @@ public class Author implements Serializable {
 
     public Author() {}
 
-    public Author(String firstName, String lastName) {
-        super();
+
+    public Author(@NotEmpty String firstName, @NotEmpty String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Long getAuthorId() {
+    public Author(@NotEmpty String firstName, @NotEmpty String lastName, List<Book> books) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.books = books;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setAuthorId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -71,6 +83,10 @@ public class Author implements Serializable {
     public void setBooks(Book book) {
         this.books.add(book);
     }
+
+//    public void setBooks(List<Book> books) {
+//        this.books = books;
+//    }
 
     @Override
     public String toString() {

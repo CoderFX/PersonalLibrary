@@ -1,5 +1,9 @@
 package lt.gelumind.personallibrary.model;
 
+import jdk.nashorn.internal.objects.annotations.Constructor;
+
+import javax.validation.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,9 +20,11 @@ public class Book implements Serializable {
     private Long id;
 
     @Column(name = "title", nullable = false)
+    @NotEmpty
     private String title;
 
     @Column(name = "year", nullable = false)
+    @NotEmpty
     private int year;
 
     @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -27,40 +33,55 @@ public class Book implements Serializable {
     public Book() {
     }
 
-    public Book(String title, int year, Author author) {
-        super();
+    public Book(@NotEmpty String title, @NotEmpty int year) {
         this.title = title;
         this.year = year;
     }
 
-    public Book(String title, int year) {
-        super();
+    public Book(@NotEmpty String title, @NotEmpty int year, List<Author> authors) {
         this.title = title;
         this.year = year;
+        this.authors = authors;
     }
 
-    public Long getBookId() {
+    public Long getId() {
         return id;
     }
 
-    public void setBookId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getBookTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setBookTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setAuthors(Author author) {
-        this.authors.add(author) ;
+    public int getYear() {
+        return year;
     }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+
 
     public List<Author> getAuthors() {
         return this.authors;
     }
+
+    // Working
+    public void setAuthors(Author author) {
+        this.authors.add(author) ;
+    }
+
+    // Also works?
+//    public void setAuthors(List<Author> authors) {
+//        this.authors = authors;
+//    }
 
 }

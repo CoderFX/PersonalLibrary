@@ -13,7 +13,6 @@ CREATE TABLE authors
 CREATE TABLE books
 (
     book_id integer not null,
-        author_id integer,
         title varchar(255),
         year integer,
         primary key (book_id)
@@ -22,7 +21,7 @@ CREATE TABLE books
 
 CREATE TABLE book_authors
 (
-author_id integer not null,
+        author_id integer not null,
         book_id integer not null
 );
 

@@ -56,16 +56,16 @@ public class AuthorRestController extends ApiRestController {
     }
 
     // Update author
-    @PutMapping(value = "/author/{id}", consumes = "application/json", produces = "application/json")
+    @PutMapping(value = "/author", consumes = "application/json", produces = "application/json")
     public HttpStatus updateAuthor(@RequestBody Author author) {
         return authorService.updateAuthor(author) ? HttpStatus.ACCEPTED : HttpStatus.BAD_REQUEST ;
     }
 
     // Delete Author by ID
-    @DeleteMapping(value = "/author/{id}", consumes = "application/json", produces = "application/json")
+    @DeleteMapping(value = "/author/{id}", produces = "application/json")
     public HttpStatus deleteAuthor(@PathVariable Long id) {
         authorService.deleteAuthor(id);
-        return HttpStatus.NO_CONTENT;
+        return HttpStatus.NO_CONTENT; //TODO if entry does not exist - application crashes - fix it
     }
 
 //    // Get authorList
