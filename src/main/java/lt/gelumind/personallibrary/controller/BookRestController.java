@@ -52,13 +52,15 @@ public class BookRestController extends ApiRestController {
     }
 
     // Delete book
-    @DeleteMapping(value = "/book?{id}", consumes = "application/json", produces = "application/json")
+    @DeleteMapping(value = "/book?{id}", produces = "application/json")
     public HttpStatus deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
         return HttpStatus.NO_CONTENT;
     }
 
     // Add author to book
+    // Since book can have many authors we need this to add multiple authors
+    // when adding a new book. Vice versa is not recommended
     @PutMapping(value = "/book/{bookId}/author/{authorId}", produces = "application/json")
     public HttpStatus addAuthor(@PathVariable Long bookId, @PathVariable Long authorId) {
         return bookService.addAuthor(bookId, authorId) ? HttpStatus.ACCEPTED : HttpStatus.BAD_REQUEST;
