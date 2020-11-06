@@ -52,7 +52,7 @@ public class BookRestController extends ApiRestController {
     }
 
     // Delete book
-    @DeleteMapping(value = "/book?{id}", produces = "application/json")
+    @DeleteMapping(value = "/book/{id}", produces = "application/json")
     public HttpStatus deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
         return HttpStatus.NO_CONTENT;
