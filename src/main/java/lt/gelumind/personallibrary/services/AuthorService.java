@@ -2,7 +2,6 @@ package lt.gelumind.personallibrary.services;
 
 import lombok.RequiredArgsConstructor;
 import lt.gelumind.personallibrary.dao.AuthorRepository;
-import lt.gelumind.personallibrary.exception.AuthorNotFoundException;
 import lt.gelumind.personallibrary.model.Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
