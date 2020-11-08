@@ -1,4 +1,4 @@
-package lt.gelumind.personallibrary.controllerstests;
+package lt.gelumind.personallibrary;
 
 import java.io.IOException;
 

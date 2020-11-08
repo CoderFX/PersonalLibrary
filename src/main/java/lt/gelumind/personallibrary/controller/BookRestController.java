@@ -21,13 +21,13 @@ public class BookRestController extends ApiRestController {
     BookService bookService;
 
     // Get all books
-    @GetMapping(value = "/books", produces = "application/json")
+    @GetMapping(value = "/book", produces = "application/json")
     public List<Book> getAll() {
         return bookService.getAllBooks();
     }
 
     // Get book by ID
-    @GetMapping(value = "/book?{id}", produces = "application/json")
+    @GetMapping(value = "/book/{id}", produces = "application/json")
     public @ResponseBody
     Optional<Book> getBookById(@PathVariable Long id) {
         return bookService.getById(id);

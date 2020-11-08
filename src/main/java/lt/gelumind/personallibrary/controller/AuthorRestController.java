@@ -28,24 +28,24 @@ public class AuthorRestController extends ApiRestController {
 
     // Get author by ID
     // {{url}}/api/author?id=VALUE
-    @GetMapping(value = "/author", produces = "application/json")
+    @GetMapping(value = "/author/{id}", produces = "application/json")
     public @ResponseBody
-    Optional<Author> getAuthorById(@RequestParam(required = false) Long id) {
+    Optional<Author> getAuthorById(@PathVariable("id") Long id) {
         return authorService.getById(id);
     }
 
     // Get author by first name
     // {{url}}/api/author?firstName=VALUE
-    @GetMapping(value = "/authors/name")
+    @GetMapping(value = "/authors/firstName/{firstName}")
     public @ResponseBody
-    List<Author> getAuthorByFirstName(@RequestParam(required = false) String firstName) {
+    List<Author> getAuthorByFirstName(@PathVariable String firstName) {
         return authorService.getByFirstName(firstName.replace('+', ' ')) ;
     }
 
     // Get author by last name
-    @GetMapping(value = "/authors/surname", produces = "application/json")
+    @GetMapping(value = "/authors/lastName/{lastName}", produces = "application/json")
     public @ResponseBody
-    List<Author> getAuthorByLastName(@RequestParam(required = false) String lastName) {
+    List<Author> getAuthorByLastName(@PathVariable String lastName) {
         return authorService.getByLastName(lastName.replace('+', ' ')) ;
     }
 
