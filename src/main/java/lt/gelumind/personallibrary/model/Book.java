@@ -80,8 +80,17 @@ public class Book implements Serializable {
     }
 
     // Also works?
-//    public void setAuthors(List<Author> authors) {
-//        this.authors = authors;
-//    }
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", year=" + year +
+                ", authors=" + authors +
+                '}';
+    }
 }
