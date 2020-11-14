@@ -2,6 +2,7 @@ package lt.gelumind.personallibrary.controller;
 
 import lombok.RequiredArgsConstructor;
 import lt.gelumind.personallibrary.dao.BookRepository;
+import lt.gelumind.personallibrary.model.Author;
 import lt.gelumind.personallibrary.model.Book;
 import lt.gelumind.personallibrary.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,20 @@ public class BookRestController extends ApiRestController {
     public HttpStatus addBook(@RequestBody Book book) {
         return bookService.addBook(book) ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST;
     }
+
+//    @PostMapping("/addBookAndAuthor")
+//    public void addBookAndAuthor(@RequestBody RequestObject formosDuomenys) {
+//        List<Author> authorList = formosDuomenys.getAuthorList();
+//        author.setBookAuthors(authorList);
+//
+//        Author author = new Author();
+//        Book book = new Book();
+//        author.setAuthorName(requestObject.getAuthorName());
+//        authorService.saveAuthor(author);
+//        book.setBookTitle(requestObject.getBookTitle());
+//        book.setAuthor(author.getId());
+//        bookService.saveBook(book);
+//    }
 
     // Update book
     @PutMapping(value = "/book", consumes = "application/json", produces = "application/json")
