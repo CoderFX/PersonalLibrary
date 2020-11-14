@@ -2,7 +2,8 @@
 //
 //import lt.gelumind.personallibrary.PersonallibraryApplication;
 //import lt.gelumind.personallibrary.model.Author;
-//import lt.gelumind.personallibrary.model.Authors;
+//import lt.gelumind.personallibrary.model.Book;
+//import lt.gelumind.personallibrary.model.Books;
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
@@ -11,12 +12,16 @@
 //import org.springframework.http.ResponseEntity;
 //import org.springframework.test.context.jdbc.Sql;
 //
+//import org.apache.log4j.Logger;
+//
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //import static org.junit.jupiter.api.Assertions.assertTrue;
 //
 //@SpringBootTest(classes = PersonallibraryApplication.class,
 //        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//public class AuthorControllerIntegrationTests {
+//public class BookRestControllerIntegrationTests {
+//
+//    private static final Logger logger = Logger.getLogger(BookRestControllerIntegrationTests.class);
 //
 //    @LocalServerPort
 //    private int port;
@@ -24,26 +29,24 @@
 //    @Autowired
 //    private TestRestTemplate restTemplate;
 //
-//    // Create sql schema and insert data
 //    @Sql({"classpath:schema.sql", "classpath:data.sql"})
-//
-//
-//
 //    @Test
-//    public void testAllAuthors() {
+//    public void testAllBooks() {
 //        assertTrue(
 //                this.restTemplate
-//                .getForObject("http://localhost:" + port + "/api/authors", Authors.class)
-//                .getAuthorList().size() == 3);
+//                        .getForObject("http://localhost:" + port + "/api/books", Books.class)
+//                        .getBookList().size() == 3);
 //    }
 //
 //    @Test
 //    public void testAddAuthor() {
 //        Author author = new Author("Patrick", "Rothfuss");
+//        logger.info(author.toString());
+//        Book book = new Book("Name of the Wind", 2007);
+//        logger.info(book.toString());
 //        ResponseEntity<String> responseEntity = this.restTemplate
-//                .postForEntity("http://localhost:" + port + "/api/authors", author, String.class);
+//                .postForEntity("http://localhost:" + port + "/api/books", book, String.class);
 //        assertEquals(201, responseEntity.getStatusCodeValue());
 //    }
-//
 //
 //}

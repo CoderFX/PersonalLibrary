@@ -2,7 +2,6 @@ package lt.gelumind.personallibrary.controller;
 
 import lombok.RequiredArgsConstructor;
 import lt.gelumind.personallibrary.dao.BookRepository;
-import lt.gelumind.personallibrary.model.Author;
 import lt.gelumind.personallibrary.model.Book;
 import lt.gelumind.personallibrary.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +14,6 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 public class BookRestController extends ApiRestController {
-    @Autowired
-    private BookRepository bookRepository;
-
     @Autowired
     BookService bookService;
 
