@@ -15,9 +15,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthorRestController extends ApiRestController {
     @Autowired
-    private AuthorRepository authorRepository;
-
-    @Autowired
     AuthorService authorService;
 
     // Get all authors
